@@ -1,5 +1,8 @@
-CMSC 161 Project 2nd Semester A.Y. 2013-2014
-============================================
+CMSC 161 Project
+================
+
+2nd Semester A.Y. 2013-2014
+---------------------------
 
 This repository is used in accomplishing the CMSC 161 project of the following students:
 
