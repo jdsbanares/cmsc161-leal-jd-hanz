@@ -1,0 +1,4 @@
+1 - Brick Walls
+2 - Metal Walls
+3 - Floor Tiles
+4 - Ceiling
