@@ -9,3 +9,7 @@ This repository is used in accomplishing the CMSC 161 project of the following s
 - Adrian J. Leal (adrian.leal23@gmail.com)
 - Jose Mari Hanz S. Arnante (hanzarnante@gmail.com)
 - Jan Denzel S. Banares (jandenzelbanares@gmail.com)
+
+
+Copyright 2014
+
