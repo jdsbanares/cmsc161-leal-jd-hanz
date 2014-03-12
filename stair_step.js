@@ -101,7 +101,7 @@ function stair_step(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	var uLightDirection= gl.getUniformLocation(program,"uLightDirection");
 	gl.uniform3f(uLightDirection, x, 0.0, z);
 	
-	/* var texture = gl.createTexture();
+	 var texture = gl.createTexture();
 	var uSampler = gl.getUniformLocation(program, 'uSampler');
 	var image = new Image(); 
 	var image1Ready = false;
@@ -116,13 +116,15 @@ function stair_step(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 		gl.uniform1i(uSampler, 0);
 		image1Ready = true;
+		
+		gl.clearColor(0, 0, 0, 1);
+		gl.enable(gl.DEPTH_TEST);
+		//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);  
 	};
-	image.src = 'textures/1.jpg'; */
+	image.src = 'textures/5.jpg'; 
 	
-	gl.clearColor(0, 0, 0, 1);
-	gl.enable(gl.DEPTH_TEST);
-	//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-	gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);   
+	 
 
 }
