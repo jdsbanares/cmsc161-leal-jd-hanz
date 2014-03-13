@@ -39,7 +39,17 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 		 1,  2,  6,
 		 1,  6,  5
 	];
-
+	
+	// Coordinates
+	var tex_coords = [
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+	];
+	
 	var verticesBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
@@ -67,19 +77,18 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 	//unbind buffer to gl.ELEMENT_ARRAY_BUFFER POINTER
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null); 
 
-	/*
+	
 	//buffer creation
 	var texCoordsBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
 	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex_coords), gl.STATIC_DRAW);
-
 	//attribute variable mapping to buffer
 	var aTexCoords = gl.getAttribLocation(program,"aTexCoords");
 	gl.vertexAttribPointer(aTexCoords,2,gl.FLOAT,false,0,0);
 	gl.enableVertexAttribArray(aTexCoords);
 	//unbind buffer to ARRAY_BUFFER POINTER
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	*/
+	
 
 	//set-up model matrix, view matrix, and projection matrix
 	var modelMatrix = mat4.create();
@@ -99,7 +108,7 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 
 	var viewMatrix = mat4.create();
 	var uView = gl.getUniformLocation(program,"uView");
-	mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
+	mat4.lookAt(viewMatrix,[1,0.25,2.5],[0,0.25,0],[0,1,0]);
 	gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 	var projectionMatrix = mat4.create();
@@ -146,42 +155,24 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 	var uEnableSpecular = gl.getUniformLocation(program,"uEnableSpecular");
 	gl.uniform1i(uEnableSpecular,true);
 
-	/*
 	var texture = gl.createTexture();
 	var uSampler = gl.getUniformLocation(program, 'uSampler');
 	var image = new Image();
 	image.onload = function(){ 
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
-		// Enable texture unit0
 		gl.activeTexture(gl.TEXTURE0);
-		// Bind the texture object to the target
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-
-		// Set the texture parameters
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-		
-		// Set the texture image
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-		
-		// Set the texture unit 0 to the sampler
 		gl.uniform1i(uSampler, 0);
 		
 		//draw scene when the image has loaded  
 		gl.clearColor(0, 0, 0, 1);
 		gl.enable(gl.DEPTH_TEST);
-		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-		
+		gl.uniformMatrix4fv(uModel,false,modelMatrix);
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 	};
-	image.src = 'flatmap1.jpg';
-	*/
-
-	//draw scene
-	gl.clearColor(0, 0, 0, 1);
-	gl.enable(gl.DEPTH_TEST);
-	//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);	// remove this to draw at same scene
-	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-	gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-
+	image.src = 'textures/3.jpg';
+	
 }

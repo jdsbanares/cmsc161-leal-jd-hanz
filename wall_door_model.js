@@ -67,6 +67,15 @@ function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotate
 		 8,  9, 13,
 		 8, 13, 12
 	];
+	
+	var tex_coords = [
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+	];
 
 	var verticesBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
@@ -95,7 +104,7 @@ function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotate
 	//unbind buffer to gl.ELEMENT_ARRAY_BUFFER POINTER
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null); 
 
-	/*
+	
 	//buffer creation
 	var texCoordsBuffer = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
@@ -107,7 +116,7 @@ function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotate
 	gl.enableVertexAttribArray(aTexCoords);
 	//unbind buffer to ARRAY_BUFFER POINTER
 	gl.bindBuffer(gl.ARRAY_BUFFER, null);
-	*/
+	
 
 	//set-up model matrix, view matrix, and projection matrix
 	var modelMatrix = mat4.create();
@@ -174,42 +183,32 @@ function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotate
 	var uEnableSpecular = gl.getUniformLocation(program,"uEnableSpecular");
 	gl.uniform1i(uEnableSpecular,true);
 
-	/*
 	var texture = gl.createTexture();
 	var uSampler = gl.getUniformLocation(program, 'uSampler');
 	var image = new Image();
 	image.onload = function(){ 
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
-		// Enable texture unit0
 		gl.activeTexture(gl.TEXTURE0);
-		// Bind the texture object to the target
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-
-		// Set the texture parameters
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-		
-		// Set the texture image
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-		
-		// Set the texture unit 0 to the sampler
 		gl.uniform1i(uSampler, 0);
 		
 		//draw scene when the image has loaded  
 		gl.clearColor(0, 0, 0, 1);
 		gl.enable(gl.DEPTH_TEST);
-		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-		
+		gl.uniformMatrix4fv(uModel,false,modelMatrix);
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 	};
-	image.src = 'flatmap1.jpg';
-	*/
-
+	image.src = '1.jpg';
+	
+	/*
 	//draw scene
 	gl.clearColor(0, 0, 0, 1);
 	gl.enable(gl.DEPTH_TEST);
 	//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);	// remove this to draw at same scene
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 	gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
-
+	*/
 }
