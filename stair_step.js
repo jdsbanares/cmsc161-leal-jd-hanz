@@ -1,5 +1,5 @@
 function stair_step(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-					
+
 	var translateMatrix = [x, y, z];
 	
 	var stair_step_vertices = [
@@ -64,6 +64,22 @@ function stair_step(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+	
+	var tex_coords = [
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+	];
+	var texCoordsBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex_coords), gl.STATIC_DRAW);
+	var aTexCoords = gl.getAttribLocation(program,"aTexCoords");
+	gl.vertexAttribPointer(aTexCoords,2,gl.FLOAT,false,0,0);
+	gl.enableVertexAttribArray(aTexCoords);
+	gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
 	var modelMatrix = mat4.create();
 	var uModel = gl.getUniformLocation(program,"uModel");
@@ -119,12 +135,13 @@ function stair_step(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 		
 		gl.clearColor(0, 0, 0, 1);
 		gl.enable(gl.DEPTH_TEST);
-		//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);  
-	};
-	image.src = 'textures/5.jpg'; 
 	
-	 
+		gl.uniformMatrix4fv(uModel,false,modelMatrix);		
+		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
+		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);   
 
+	};
+	image.src = 'textures/5.jpg';
+	
+	
 }

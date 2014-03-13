@@ -65,6 +65,23 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
+	var tex_coords = [   // Coordinates
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+	];
+	
+	var texCoordsBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex_coords), gl.STATIC_DRAW);
+	var aTexCoords = gl.getAttribLocation(program,"aTexCoords");
+	gl.vertexAttribPointer(aTexCoords,2,gl.FLOAT,false,0,0);
+	gl.enableVertexAttribArray(aTexCoords);
+	gl.bindBuffer(gl.ARRAY_BUFFER, null);
+	
 	var modelMatrix = mat4.create();
 	var uModel = gl.getUniformLocation(program,"uModel");
 	mat4.translate(modelMatrix, modelMatrix, translateMatrix);
@@ -81,7 +98,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 	var viewMatrix = mat4.create();
 	var uView = gl.getUniformLocation(program,"uView");
-	mat4.lookAt(viewMatrix,[3,3,7],[0,0,0],[0,1,0]);
+	mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
 	gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 	var projectionMatrix = mat4.create();
@@ -116,15 +133,16 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		gl.uniform1i(uSampler, 0);
 		image1Ready = true;
-		
 		gl.clearColor(0, 0, 0, 1);
 		gl.enable(gl.DEPTH_TEST);
-		//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+		gl.uniformMatrix4fv(uModel,false,modelMatrix);		
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);   
-
+	
 	};
 	image.src = 'textures/1.jpg';
+	
 }
 
 function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
@@ -193,7 +211,24 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 	gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
 	gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
-
+	
+	var tex_coords = [   // Coordinates
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+		1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+	];
+	
+	var texCoordsBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texCoordsBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(tex_coords), gl.STATIC_DRAW);
+	var aTexCoords = gl.getAttribLocation(program,"aTexCoords");
+	gl.vertexAttribPointer(aTexCoords,2,gl.FLOAT,false,0,0);
+	gl.enableVertexAttribArray(aTexCoords);
+	gl.bindBuffer(gl.ARRAY_BUFFER, null);
+	
 	var modelMatrix = mat4.create();
 	var uModel = gl.getUniformLocation(program,"uModel");
 	mat4.translate(modelMatrix, modelMatrix, translateMatrix);
@@ -210,7 +245,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 	var viewMatrix = mat4.create();
 	var uView = gl.getUniformLocation(program,"uView");
-	mat4.lookAt(viewMatrix,[3,3,7],[0,0,0],[0,1,0]);
+	mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
 	gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 	var projectionMatrix = mat4.create();
@@ -248,7 +283,8 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 		
 		gl.clearColor(0, 0, 0, 1);
 		gl.enable(gl.DEPTH_TEST);
-		//gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+		gl.uniformMatrix4fv(uModel,false,modelMatrix);		
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_BYTE, 0);   
 
