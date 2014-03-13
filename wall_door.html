@@ -7,18 +7,19 @@
 
 <head>
 	<script type="x-shader/x-vertex" id="vshader">
+
 		attribute vec3 aPosition;
-
+		attribute vec2 aTexCoords;
 		attribute vec3 aNormal;
-
+		
 		uniform mat4 uModel;
 		uniform mat4 uView;
 		uniform mat4 uProjection;
 		uniform mat4 uNormal;
-
+		
 		varying vec3 vNormal;
 		varying vec3 vPosition;
-
+		varying vec2 vTexCoords;
 		void main() {
 			gl_Position = uProjection * uView * uModel * vec4(aPosition,1.0);
 			
@@ -27,6 +28,8 @@
 
 			vPosition =  vertexPosition;
 			vNormal = corrected_aNormal;
+			
+			vTexCoords = aTexCoords;			
 		}
 	</script>
 	<script type="x-shader/x-fragment" id="fshader">
@@ -49,10 +52,13 @@
 		uniform bool uEnableDiffuse;
 		uniform bool uEnableSpecular;
 
+		uniform sampler2D uSampler;
+		
 		varying vec3 vNormal;
 		varying vec3 vPosition;
+		varying vec2 vTexCoords;
+		
 		void main() {
-
 			vec3 ambientColor = vec3(0.0,0.0,0.0);
 			vec3 diffuseColor = vec3(0.0,0.0,0.0);
 			vec3 specularColor = vec3(0.0,0.0,0.0);
@@ -85,7 +91,9 @@
 
 			vec4 finalColor = vec4(ambientColor+diffuseColor+specularColor,1.0);
 
-			gl_FragColor = finalColor;
+			//gl_FragColor = finalColor;
+			
+			gl_FragColor = texture2D(uSampler, vTexCoords);
 		}
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
@@ -102,8 +110,8 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 		
-			create_wall_door(gl, program, canvas, 0,-0.05,1, 0,0,0);
-			create_wall_door(gl, program, canvas, 0.1,-0.05,1, 0,0,0);
+			//create_wall_door(gl, program, canvas, 0,-0.05,1, 0,0,0);
+			create_wall_door(gl, program, canvas, 0.4,-0.05,1.4, 0,0,0);
 		}
 
 	</script>
