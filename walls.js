@@ -1,8 +1,8 @@
 function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	
-	create_ledge(gl, program, canvas, x+0.1, y, z, rotateX, rotateY, rotateZ);
+	create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 	create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
-	
+	create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 }
 
 function create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
@@ -115,7 +115,7 @@ function create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 	var viewMatrix = mat4.create();
 	var uView = gl.getUniformLocation(program,"uView");
-	mat4.lookAt(viewMatrix,[1,0.25,2.5],[0,0.25,0],[0,1,0]);
+	mat4.lookAt(viewMatrix,[1,0.75,2.5],[0,0.25,0],[0,1,0]);
 	gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 	var projectionMatrix = mat4.create();
@@ -188,14 +188,14 @@ function create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 	// Coordinates
 	var vertices = [
-		 0.000,  0.000,  0.0125,
-		 0.100,  0.000,  0.0125,
-		 0.100,  0.450,  0.0125,
-		 0.000,  0.450,  0.0125,
-		 0.000,  0.000,  0.0375,
-		 0.100,  0.000,  0.0375,
-		 0.100,  0.450,  0.0375,
-		 0.000,  0.450,  0.0375
+		 0.000,  0.000,  0.0125,	// 0 - Back Lower Left
+		 0.100,  0.000,  0.0125,	// 1 - Back Lower Right
+		 0.100,  0.450,  0.0125,	// 2 - Back Upper Right
+		 0.000,  0.450,  0.0125,	// 3 - Back Upper Left
+		 0.000,  0.000,  0.0375,	// 4 - Front Lower Left
+		 0.100,  0.000,  0.0375,	// 5 - Front Lower Right
+		 0.100,  0.450,  0.0375,	// 6 - Front Upper Right
+		 0.000,  0.450,  0.0375		// 7 - Front Upper Left
 	];
 
 	// Normal of each vertex

@@ -98,9 +98,8 @@
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
 	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="wall_door_model.js"></script>
+	<script type="text/javascript" src="walls.js"></script>
 	<script>
-		var image;
 		function main() {
 			var canvas = document.getElementById("c");
 			var gl = initializeWebGL(canvas);
@@ -110,8 +109,10 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 		
-			//create_wall_door(gl, program, canvas, 0,-0.05,1, 0,0,0);
+			create_wall_door(gl, program, canvas, 0.3,-0.05,1.4, 0,0,0);
 			create_wall_door(gl, program, canvas, 0.4,-0.05,1.4, 0,0,0);
+			create_wall_door(gl, program, canvas, 0.5,-0.05,1.4, 0,0,0);
+			create_wall_door(gl, program, canvas, 0.6,-0.05,1.4, 0,0,0);
 		}
 
 	</script>

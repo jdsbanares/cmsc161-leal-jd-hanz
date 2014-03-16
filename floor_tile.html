@@ -98,9 +98,8 @@
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
 	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="floor_tile_model.js"></script>
+	<script type="text/javascript" src="floor.js"></script>
 	<script>
-		var image;
 		function main() {
 			var canvas = document.getElementById("c");
 			var gl = initializeWebGL(canvas);
@@ -110,8 +109,8 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 			
-			for(var i=-10; i<10; i++){
-				for(var j=-10; j<10; j++){
+			for(var i=0; i<10; i++){
+				for(var j=0; j<10; j++){
 					create_floor_tile(gl, program, canvas, (0.1*i),0,0+(j*0.1), 0,0,0);
 				}
 			}

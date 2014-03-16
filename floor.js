@@ -108,7 +108,8 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 
 	var viewMatrix = mat4.create();
 	var uView = gl.getUniformLocation(program,"uView");
-	mat4.lookAt(viewMatrix,[1,0.25,2.5],[0,0.25,0],[0,1,0]);
+	//mat4.lookAt(viewMatrix,[2,0.25,2],[0,0.25,0],[0,1,0]);
+	mat4.lookAt(viewMatrix,[1,5.25,0],[0,0.25,0],[0,1,0]);
 	gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 	var projectionMatrix = mat4.create();
