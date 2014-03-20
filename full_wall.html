@@ -51,7 +51,6 @@
 		</script>
 		<script type="text/javascript" src="initUtils.js"></script>
 		<script type="text/javascript" src="gl-matrix-min.js"></script>
-		<script type="text/javascript" src="load_images.js"></script>
 		<script type="text/javascript" src="walls.js"></script>
 		<script type="text/javascript" src="stair_step.js"></script>
 		<script>
@@ -72,17 +71,17 @@
 				stair_step(gl,program,canvas,0.3,0,0,90,0,0);
 				stair_step(gl,program,canvas,0.4,0,0,90,0,0);
 				
-				full_brick_wall(gl,program,canvas,0,0,0,90,0,0);
-				full_brick_wall(gl,program,canvas,0,0.1,0,90,0,0);
-				full_brick_wall(gl,program,canvas,0,0.2,0,90,0,0);
-				full_brick_wall(gl,program,canvas,0,0.3,0,90,0,0);
-				full_brick_wall(gl,program,canvas,0,0.4,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0,0,0,0,90,0);
+				full_brick_wall(gl,program,canvas,0.1,0,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0.2,0,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0.3,0,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0.4,0,0,90,0,0);
 				
 			}
 		</script>
 	</head>
 	<body onload="main()">
-		<canvas id="c" width="400" height="400" style="border: 1px black solid; ">
+		<canvas id="c" width="800" height="800" style="border: 1px black solid; ">
 		</canvas>
 	</body>
 </html>
