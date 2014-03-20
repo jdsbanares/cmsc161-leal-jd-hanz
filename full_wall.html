@@ -51,6 +51,7 @@
 		</script>
 		<script type="text/javascript" src="initUtils.js"></script>
 		<script type="text/javascript" src="gl-matrix-min.js"></script>
+		<script type="text/javascript" src="load_images.js"></script>
 		<script type="text/javascript" src="walls.js"></script>
 		<script type="text/javascript" src="stair_step.js"></script>
 		<script>
@@ -65,8 +66,17 @@
 				
 				//full_metal_wall(gl,program,canvas,0,0,0,0,0,0);
 				//full_metal_wall(gl,program,canvas,1.5,0,0,0,0,0);
-				full_brick_wall(gl,program,canvas,0,0,0,90,90,0);
-				//stair_step(gl,program,canvas,-1,0,0,0,0,0);
+				stair_step(gl,program,canvas,0,0,0,90,0,0);
+				stair_step(gl,program,canvas,0.1,0,0,90,0,0);
+				stair_step(gl,program,canvas,0.2,0,0,90,0,0);
+				stair_step(gl,program,canvas,0.3,0,0,90,0,0);
+				stair_step(gl,program,canvas,0.4,0,0,90,0,0);
+				
+				full_brick_wall(gl,program,canvas,0,0,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0,0.1,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0,0.2,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0,0.3,0,90,0,0);
+				full_brick_wall(gl,program,canvas,0,0.4,0,90,0,0);
 				
 			}
 		</script>
