@@ -98,7 +98,7 @@
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
 	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="patio_kitchen.js"></script>
+	<script type="text/javascript" src="comfortroom.js"></script>
 	<script>
 		function main() {
 			var canvas = document.getElementById("c");
@@ -109,7 +109,7 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 		
-			create_longchair(gl, program, canvas, 0,0,0, 0,0,0);
+			create_toilet(gl, program, canvas, 0,0,0, 0,0,0);
 		}
 
 	</script>

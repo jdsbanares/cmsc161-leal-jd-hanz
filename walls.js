@@ -297,7 +297,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 function create_wall_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
-	create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
+	create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 	create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 }
 
@@ -307,7 +307,7 @@ function create_wall_window(gl, program, canvas, x, y, z, rotateX, rotateY, rota
 	create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 }
 
-function create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	
 	var image = new Image();
 	image.onload = function(){ 
