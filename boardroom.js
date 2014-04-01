@@ -1,25 +1,24 @@
-function create_sofa(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-	create_sofa_armrest(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
-	create_sofa_seat(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
-	create_sofa_armrest(gl, program, canvas, x+0.8, y, z, rotateX, rotateY, rotateZ);
+function create_conferencechair(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+	create_chair_stand(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
+	create_chair_seat(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 }
 
-function create_sofa_armrest(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_chair_stand(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	
 	var image = new Image();
 	image.onload = function(){ 
 		// Coordinates
 		var vertices = [
-			 0.00,  0.00,  0.00,	// 0
-			 0.00,  0.00, -0.30,	// 1
-			 0.10,  0.00, -0.30,	// 2
-			 0.10,  0.00,  0.00,	// 3
-			 0.00,  0.20,  0.00,	// 4
-			 0.00,  0.20, -0.30,	// 5
-			 0.10,  0.20, -0.30,	// 6
-			 0.10,  0.20,  0.00	// 7
+			 0.05,  0.00, -0.05,	// 0
+			 0.05,  0.00, -0.15,	// 1
+			 0.15,  0.00, -0.15,	// 2
+			 0.15,  0.00, -0.05,	// 3
+			 0.08,  0.10, -0.05,	// 4
+			 0.08,  0.10, -0.15,	// 5
+			 0.12,  0.10, -0.15,	// 6
+			 0.12,  0.10, -0.05	// 7
 		];
-
+		
 		// Normal of each vertex
 		var normals = [
 			 0.0,  0.0,  1.0,
@@ -179,28 +178,28 @@ function create_sofa_armrest(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 	};
-	image.src = 'textures/11.jpg';
+	image.src = 'textures/2.jpg';
 
 }
 
-function create_sofa_seat(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_chair_seat(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	
 	var image = new Image();
 	image.onload = function(){ 
 		// Coordinates
 		var vertices = [
-			 0.10,  0.00,  0.00,	// 0
-			 0.10,  0.00, -0.30,	// 1
-			 0.80,  0.00, -0.30,	// 2
-			 0.80,  0.00,  0.00,	// 3
-			 0.10,  0.15,  0.00,	// 4
-			 0.80,  0.15,  0.00,	// 5
-			 0.10,  0.15, -0.20,	// 6
-			 0.80,  0.15, -0.20,	// 7
-			 0.10,  0.30, -0.20,	// 8
-			 0.80,  0.30, -0.20,	// 9
-			 0.10,  0.30, -0.30,	// 10
-			 0.80,  0.30, -0.30	// 11
+			 0.00,  0.10,  0.00,	// 0
+			 0.00,  0.10, -0.20,	// 1
+			 0.20,  0.10, -0.20,	// 2
+			 0.20,  0.10,  0.00,	// 3
+			 0.00,  0.15,  0.00,	// 4
+			 0.20,  0.15,  0.00,	// 5
+			 0.00,  0.15, -0.15,	// 6
+			 0.20,  0.15, -0.15,	// 7
+			 0.00,  0.40, -0.15,	// 8
+			 0.20,  0.40, -0.15,	// 9
+			 0.00,  0.40, -0.20,	// 10
+			 0.20,  0.40, -0.20	// 11
 		];
 
 		// Normal of each vertex
