@@ -4,7 +4,7 @@
 3 - wall with door
 4 - wall with window
 
-1 meter - 5 objects
+1square = 1 meter = 5 wall/floor
 
 
 Men's comfort room
