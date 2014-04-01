@@ -1,42 +1,67 @@
-function create_wall_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-	create_ledge_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
-	create_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
-	create_ledge_window(gl, program, canvas, x, y-0.3, z, rotateX, rotateY, rotateZ);
+function create_patio_table(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+	create_table_top(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
+	create_table_foot(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
+	create_table_foot(gl, program, canvas, x+0.375, y, z, rotateX, rotateY, rotateZ);
+	create_table_foot(gl, program, canvas, x+0.375, y, z+0.375, rotateX, rotateY, rotateZ);
+	create_table_foot(gl, program, canvas, x, y, z+0.375, rotateX, rotateY, rotateZ);
 }
 
-function create_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+
+function create_table_foot(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 	var image = new Image();
 	image.onload = function(){ 
+
 		// Coordinates
 		var vertices = [
-			 // 0.0,  0.0,  0.0,
-			 // 0.1,  0.0,  0.0,
-			 // 0.1,  -0.1,  0.0,
-			 // 0.0,  -0.1,  0.0
-			 0.0,  -0.1,  0.0,
-			 0.1,  -0.1,  0.0,
-			 0.1,  -0.3,  0.0,
-			 0.0,  -0.3,  0.0
+			0.0,  -0.05,  0.0,//0
+			0.025,  -0.05,  0.0,//1
+			0.025,  -0.05,  0.025,//2
+			0.0,  -0.05, 0.025,//3
+
+			0.0,  -0.2,  0.0,//4
+			0.025,  -0.2,  0.0,//5
+			0.025,  -0.2,  0.025,//6
+			0.0,  -	0.2, 0.025//7
+
 		];
 
 		// Normal of each vertex
 		var normals = [
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
+			 0.0,  0.0, -1.0,
+			 0.0,  0.0, -1.0,
+			 0.0,  0.0,  1.0,
+			 0.0,  0.0,  1.0,
 			 0.0,  0.0,  1.0,
 			 0.0,  0.0,  1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
-			 0,  1,  3,
-			 3,  1,  2
+			0, 1, 3,
+			3, 1, 2,
+			4, 5, 7,
+			7, 5, 6,
+			3, 2, 7,
+			7, 2, 6,
+			0, 1, 4,
+			4, 1, 5,
+			0, 3, 4,
+			4, 3, 7,
+			2, 1, 6,
+			6, 1, 5
 		];
 
 		// Coordinates
 		var tex_coords = [
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
 		];
 
 		var verticesBuffer = gl.createBuffer();
@@ -146,7 +171,7 @@ function create_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -161,39 +186,64 @@ function create_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 	};
-	image.src = 'textures/6.jpg';
+	image.src = 'textures/8.jpg';
 
 }
 
-function create_ledge_window(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+
+function create_table_top(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 	var image = new Image();
 	image.onload = function(){ 
+
 		// Coordinates
 		var vertices = [
-			 0.0,  0.0,  0.0,
-			 0.1,  0.0,  0.0,
-			 0.1,  -0.1,  0.0,
-			 0.0,  -0.1,  0.0
+			0.0,  0.0,  0.0, //0
+			0.4,  0.0,  0.0,//1
+			0.4,  0.0,  0.4,//2
+			0.0,  0.0,  0.4,//3
+			0.0,  -0.05,  0.0,//4
+			0.4,  -0.05,  0.0,//5
+			0.4,  -0.05,  0.4,//6
+			0.0,  -0.05,  0.4,//7
 		];
 
 		// Normal of each vertex
 		var normals = [
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
+			 0.0,  0.0, -1.0,
+			 0.0,  0.0, -1.0,
+			 0.0,  0.0,  1.0,
+			 0.0,  0.0,  1.0,
 			 0.0,  0.0,  1.0,
 			 0.0,  0.0,  1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
-			 0,  1,  3,
-			 3,  1,  2
+			0, 1, 3,
+			3, 1, 2,
+			4, 5, 7,
+			7, 5, 6,
+			3, 2, 7,
+			7, 2, 6,
+			0, 1, 4,
+			4, 1, 5,
+			0, 3, 4,
+			4, 3, 7,
+			2, 1, 6,
+			6, 1, 5
 		];
 
 		// Coordinates
 		var tex_coords = [
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
 		];
 
 		var verticesBuffer = gl.createBuffer();
@@ -303,7 +353,7 @@ function create_ledge_window(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -318,6 +368,6 @@ function create_ledge_window(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 		gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT, 0);
 	};
-	image.src = 'textures/1.jpg';
+	image.src = 'textures/8.jpg';
 
 }

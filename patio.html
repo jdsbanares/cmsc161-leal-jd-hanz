@@ -98,7 +98,7 @@
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
 	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="walls.js"></script>
+	<script type="text/javascript" src="patio_kitchen.js"></script>
 	<script>
 		function main() {
 			var canvas = document.getElementById("c");
@@ -109,7 +109,7 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 		
-			create_wall_window(gl, program, canvas, 0.1,0.0, 0.0, 0,0,0);
+			create_patio_table(gl, program, canvas, 0.0, 0.0, 0.0, 0,0,0);
 		}
 
 	</script>
