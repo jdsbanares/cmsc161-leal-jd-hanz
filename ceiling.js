@@ -7,29 +7,29 @@ function create_ceiling_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 		var vertices = [
 			 0.00,  0.00,  0.00,
 			 0.10,  0.00,  0.00,
-			 0.10,  0.00,  0.10,
-			 0.00,  0.00,  0.10,
-			 0.00,  0.03,  0.00,
-			 0.10,  0.03,  0.00,
-			 0.10,  0.03,  0.10,
-			 0.00,  0.03,  0.10
+			 //0.10,  0.00,  0.10,
+			 //0.00,  0.00,  0.10,
+			 0.00,  0.0,  0.30,
+			 0.10,  0.0,  0.30
+			 //0.10,  0.03,  0.10,
+			 //0.00,  0.03,  0.10
 		];
 
 		// Normal of each vertex
 		var normals = [
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
+			 //0.0,  0.0, -1.0,
+			 //0.0,  0.0, -1.0,
 			 0.0,  0.0,  1.0,
 			 0.0,  0.0,  1.0
+			 //0.0,  0.0,  1.0,
+			 //0.0,  0.0,  1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
-			 0,  1,  2,
+			 /*0,  1,  2,
 			 0,  2,  3,
 			 4,  5,  6,
 			 4,  6,  7,
@@ -40,17 +40,20 @@ function create_ceiling_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 			 0,  1,  5,
 			 0,  5,  4,
 			 1,  2,  6,
-			 1,  6,  5
+			 1,  6,  5*/
+			 0,  1,  2,
+			 2,  1,  3
+
 		];
 		
 		// Coordinates
 		var tex_coords = [
 			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//right
+			//1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
+			//1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
+			//1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
+			//1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
 		];
 		
 		var verticesBuffer = gl.createBuffer();
@@ -112,7 +115,7 @@ function create_ceiling_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rot
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
 		//mat4.lookAt(viewMatrix,[2,0.25,2],[0,0.25,0],[0,1,0]);
-		mat4.lookAt(viewMatrix,[1,5.25,0],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[1,4.25,0],[0,0.25,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
