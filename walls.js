@@ -308,7 +308,7 @@ function create_wall_window(gl, program, canvas, x, y, z, rotateX, rotateY, rota
 }
 
 function create_ledge(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-
+	
 	var image = new Image();
 	image.onload = function(){ 
 		// Coordinates
