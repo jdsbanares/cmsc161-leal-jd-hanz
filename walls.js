@@ -1,4 +1,4 @@
-function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ, scaleM){
 
 	var image = new Image(); 
 	var image1Ready = false;
@@ -64,7 +64,9 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var modelMatrix = mat4.create();
 		var uModel = gl.getUniformLocation(program,"uModel");
+		
 		mat4.translate(modelMatrix, modelMatrix, translateMatrix);
+		mat4.scale(modelMatrix, modelMatrix, scaleM);
 		mat4.rotateX(modelMatrix,modelMatrix,glMatrix.toRadian(rotateX));
 		mat4.rotateY(modelMatrix,modelMatrix,glMatrix.toRadian(rotateY));
 		mat4.rotateZ(modelMatrix,modelMatrix,glMatrix.toRadian(rotateZ));
@@ -78,7 +80,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[1,3,3],[0,0,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
@@ -123,7 +125,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 }
 
-function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ, scale){
 	
 	var image = new Image(); 
 	var image1Ready = false;
@@ -189,6 +191,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var modelMatrix = mat4.create();
 		var uModel = gl.getUniformLocation(program,"uModel");
+		mat4.scale(modelMatrix, modelMatrix, scale);
 		mat4.translate(modelMatrix, modelMatrix, translateMatrix);
 		mat4.rotateX(modelMatrix,modelMatrix,glMatrix.toRadian(rotateX));
 		mat4.rotateY(modelMatrix,modelMatrix,glMatrix.toRadian(rotateY));
@@ -203,7 +206,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[1,3,3],[0,0,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
