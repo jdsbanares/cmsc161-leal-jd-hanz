@@ -316,11 +316,7 @@ function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 			 0.000,  0.450,  0.0000,
 			 0.100,  0.450,  0.0000,
 			 0.100,  0.600,  0.0000,
-			 0.000,  0.600,  0.0000,
-			 0.000,  0.450,  0.0500,
-			 0.100,  0.450,  0.0500,
-			 0.100,  0.600,  0.0500,
-			 0.000,  0.600,  0.0500
+			 0.000,  0.600,  0.0000
 		];
 
 		// Normal of each vertex
@@ -328,37 +324,18 @@ function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0
+			 0.0,  0.0, -1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
 			 0,  1,  2,
-			 0,  2,  3,
-			 4,  5,  6,
-			 4,  6,  7,
-			 2,  3,  7,
-			 2,  7,  6,
-			 3,  0,  4,
-			 3,  4,  7,
-			 0,  1,  5,
-			 0,  5,  4,
-			 1,  2,  6,
-			 1,  6,  5
+			 0,  2,  3
 		];
 
 		// Coordinates
 		var tex_coords = [
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
 		];
 
 		var verticesBuffer = gl.createBuffer();
@@ -493,14 +470,10 @@ function create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	image.onload = function(){ 
 		// Coordinates
 		var vertices = [
-			 0.000,  0.000,  0.0125,	// 0 - Back Lower Left
-			 0.100,  0.000,  0.0125,	// 1 - Back Lower Right
-			 0.100,  0.450,  0.0125,	// 2 - Back Upper Right
-			 0.000,  0.450,  0.0125,	// 3 - Back Upper Left
-			 0.000,  0.000,  0.0375,	// 4 - Front Lower Left
-			 0.100,  0.000,  0.0375,	// 5 - Front Lower Right
-			 0.100,  0.450,  0.0375,	// 6 - Front Upper Right
-			 0.000,  0.450,  0.0375		// 7 - Front Upper Left
+			 0.000,  0.000,  0.0,	// 0 - Back Lower Left
+			 0.100,  0.000,  0.0,	// 1 - Back Lower Right
+			 0.100,  0.450,  0.0,	// 2 - Back Upper Right
+			 0.000,  0.450,  0.0	// 3 - Back Upper Left
 		];
 
 		// Normal of each vertex
@@ -508,37 +481,18 @@ function create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
 			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0
+			 0.0,  0.0, -1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
 			 0,  1,  2,
-			 0,  2,  3,
-			 4,  5,  6,
-			 4,  6,  7,
-			 2,  3,  7,
-			 2,  7,  6,
-			 3,  0,  4,
-			 3,  4,  7,
-			 0,  1,  5,
-			 0,  5,  4,
-			 1,  2,  6,
-			 1,  6,  5
+			 0,  2,  3
 		];
 
 		// Coordinates
 		var tex_coords = [
 			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
 		];
 
 		var verticesBuffer = gl.createBuffer();

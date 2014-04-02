@@ -98,7 +98,7 @@
 	</script>
 	<script type="text/javascript" src="initUtils.js"></script>
 	<script type="text/javascript" src="gl-matrix-min.js"></script>
-	<script type="text/javascript" src="boardroom.js"></script>
+	<script type="text/javascript" src="labroom.js"></script>
 	<script>
 		function main() {
 			var canvas = document.getElementById("c");
@@ -109,7 +109,7 @@
 			var program = initializeProgram(gl,vertexShader,fragmentShader);
 			gl.useProgram(program);
 		
-			create_conferencechair(gl, program, canvas, 0,0,0, 0,0,0);
+			create_beaker(gl, program, canvas, 0,0,0, 0,0,0);
 		}
 
 	</script>
