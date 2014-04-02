@@ -8,13 +8,11 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var full_wall_vertices = [
 			0.0, 0.0, 0.0,
-			0.1, 0.0, 0.0,
-			0.0, 0.0, 0.05,
-			0.1, 0.0, 0.05,
 			0.0, 0.6, 0.0,
 			0.1, 0.6, 0.0,
-			0.0, 0.6, 0.05,
-			0.1, 0.6, 0.05
+			0.1, 0.0, 0.0
+			
+			
 		];
 
 		var fullWallVerticesBuffer = gl.createBuffer();
@@ -29,11 +27,8 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 			 0.0,  0.0, 1.0,
 			 0.0,  0.0, 1.0,
 			 0.0,  0.0, 1.0,
-			 0.0,  0.0, 1.0,
-			 0.0,  0.0, 1.0,
-			 0.0,  0.0, 1.0,
-			 0.0,  0.0, 1.0,
 			 0.0,  0.0, 1.0
+			
 		];
 
 		var normalBuffer = gl.createBuffer();
@@ -46,22 +41,8 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var indices = [
 			0, 1, 2,
-			1, 2, 3,
+			0, 2, 3
 
-			0, 4, 6,
-			0, 2, 6,
-
-			0, 4, 1,
-			4, 1, 5,
-
-			1, 5, 3,
-			5, 3, 7,
-
-			3, 7, 2,
-			7, 2, 6,
-
-			6, 4, 7,
-			4, 7, 5
 		];
 
 		var indexBuffer = gl.createBuffer();
@@ -70,12 +51,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
 		var tex_coords = [   // Coordinates
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front			
 		];
 
 		var texCoordsBuffer = gl.createBuffer();
@@ -128,8 +104,8 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+		//gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
 		gl.generateMipmap(gl.TEXTURE_2D);
 
@@ -156,13 +132,9 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var full_wall_vertices = [
 			0.0, 0.0, 0.0,
-			0.1, 0.0, 0.0,
-			0.0, 0.0, 0.05,
-			0.1, 0.0, 0.05,
 			0.0, 0.6, 0.0,
 			0.1, 0.6, 0.0,
-			0.0, 0.6, 0.05,
-			0.1, 0.6, 0.05
+			0.1, 0.0, 0.0
 		];
 
 		var fullWallVerticesBuffer = gl.createBuffer();
@@ -194,22 +166,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var indices = [
 			0, 1, 2,
-			1, 2, 3,
-
-			0, 4, 6,
-			0, 2, 6,
-
-			0, 4, 1,
-			4, 1, 5,
-
-			1, 5, 3,
-			5, 3, 7,
-
-			3, 7, 2,
-			7, 2, 6,
-
-			6, 4, 7,
-			4, 7, 5
+			0, 2, 3
 		];
 
 		var indexBuffer = gl.createBuffer();
@@ -218,12 +175,8 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 		gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
 		var tex_coords = [   // Coordinates
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
+			
 		];
 
 		var texCoordsBuffer = gl.createBuffer();
@@ -276,8 +229,8 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
-		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+		
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
 		gl.generateMipmap(gl.TEXTURE_2D);
 
