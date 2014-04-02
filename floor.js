@@ -6,51 +6,30 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 		// Coordinates
 		var vertices = [
 			 0.00,  0.00,  0.00,
-			 0.10,  0.00,  0.00,
-			 0.10,  0.00,  0.10,
-			 0.00,  0.00,  0.10,
-			 0.00,  0.03,  0.00,
-			 0.10,  0.03,  0.00,
-			 0.10,  0.03,  0.10,
-			 0.00,  0.03,  0.10
-		];
+			 0.00,  0.10,  0.00,
+			 0.10,  0.10,  0.00,
+			 0.10,  0.00,  0.00
+			];
 
 		// Normal of each vertex
 		var normals = [
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0, -1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0,
-			 0.0,  0.0,  1.0
+			 0.0,  0.0, 1.0,
+			 0.0,  0.0, 1.0,
+			 0.0,  0.0, 1.0,
+			 0.0,  0.0, 1.0
 		];
 
 		// Indices of the vertices
 		var indices = [
 			 0,  1,  2,
-			 0,  2,  3,
-			 4,  5,  6,
-			 4,  6,  7,
-			 2,  3,  7,
-			 2,  7,  6,
-			 3,  0,  4,
-			 3,  4,  7,
-			 0,  1,  5,
-			 0,  5,  4,
-			 1,  2,  6,
-			 1,  6,  5
+			 0,  2,  3
+			 
 		];
 		
 		// Coordinates
 		var tex_coords = [
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//front
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//right
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//up
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//left
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0,	//down
-			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//back
+			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
+			
 		];
 		
 		var verticesBuffer = gl.createBuffer();
@@ -96,10 +75,11 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 		//set-up model matrix, view matrix, and projection matrix
 		var modelMatrix = mat4.create();
 		var uModel = gl.getUniformLocation(program,"uModel");
+		mat4.scale(modelMatrix,modelMatrix,[15,15,0]);
 		mat4.translate(modelMatrix,modelMatrix,[x,y,z]);
-		mat4.rotateX(modelMatrix,modelMatrix,rotateX);
-		mat4.rotateY(modelMatrix,modelMatrix,rotateY);
-		mat4.rotateZ(modelMatrix,modelMatrix,rotateZ);
+		mat4.rotateX(modelMatrix,modelMatrix,glMatrix.toRadian(rotateX));
+		mat4.rotateY(modelMatrix,modelMatrix,glMatrix.toRadian(rotateY));
+		mat4.rotateZ(modelMatrix,modelMatrix,glMatrix.toRadian(rotateZ));
 		gl.uniformMatrix4fv(uModel,false,modelMatrix);
 
 		//add normal matrix
@@ -112,7 +92,7 @@ function create_floor_tile(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
 		//mat4.lookAt(viewMatrix,[2,0.25,2],[0,0.25,0],[0,1,0]);
-		mat4.lookAt(viewMatrix,[1,5.25,0],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[8,3,3],[0,0,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
