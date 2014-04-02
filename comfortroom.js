@@ -603,7 +603,7 @@ function create_urinal(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,1],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[-5,2,3],[2,0,-2],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();

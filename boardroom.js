@@ -1,4 +1,4 @@
-function create_conferencechair(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_conference_chair(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 	create_chair_stand(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 	create_chair_seat(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ);
 }
@@ -900,7 +900,7 @@ function create_conference_top(gl, program, canvas, x, y, z, rotateX, rotateY, r
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,1],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[8,3,3],[0,0,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
@@ -1046,7 +1046,7 @@ function create_conference_table_leg(gl, program, canvas, x, y, z, rotateX, rota
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,1],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[8,3,3],[0,0,0],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();

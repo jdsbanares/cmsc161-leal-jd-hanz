@@ -80,7 +80,7 @@ function create_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,3,5],[0,0,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[-5,2,3],[2,0,-2],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
@@ -206,7 +206,7 @@ function create_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,3,3],[0,0,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[-5,2,3],[2,0,-2],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
