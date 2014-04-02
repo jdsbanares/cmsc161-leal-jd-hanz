@@ -1,9 +1,9 @@
-function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
+function create_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ, scaleM){
 
 	var image = new Image(); 
 	var image1Ready = false;
 	image.onload = function(){ 
-		
+
 		var translateMatrix = [x, y, z];
 
 		var full_wall_vertices = [
@@ -11,8 +11,8 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 			0.0, 0.6, 0.0,
 			0.1, 0.6, 0.0,
 			0.1, 0.0, 0.0
-			
-			
+
+
 		];
 
 		var fullWallVerticesBuffer = gl.createBuffer();
@@ -28,7 +28,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 			 0.0,  0.0, 1.0,
 			 0.0,  0.0, 1.0,
 			 0.0,  0.0, 1.0
-			
+
 		];
 
 		var normalBuffer = gl.createBuffer();
@@ -64,7 +64,9 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var modelMatrix = mat4.create();
 		var uModel = gl.getUniformLocation(program,"uModel");
+
 		mat4.translate(modelMatrix, modelMatrix, translateMatrix);
+		mat4.scale(modelMatrix, modelMatrix, scaleM);
 		mat4.rotateX(modelMatrix,modelMatrix,glMatrix.toRadian(rotateX));
 		mat4.rotateY(modelMatrix,modelMatrix,glMatrix.toRadian(rotateY));
 		mat4.rotateZ(modelMatrix,modelMatrix,glMatrix.toRadian(rotateZ));
@@ -78,7 +80,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[-5,2,3],[2,0,-2],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
@@ -100,7 +102,7 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -123,8 +125,8 @@ function full_brick_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 }
 
-function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-	
+function create_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ, scale){
+
 	var image = new Image(); 
 	var image1Ready = false;
 	image.onload = function(){ 
@@ -176,7 +178,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var tex_coords = [   // Coordinates
 			1.0, 1.0,	0.0, 1.0,	0.0, 0.0,	1.0, 0.0	//front
-			
+
 		];
 
 		var texCoordsBuffer = gl.createBuffer();
@@ -189,6 +191,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var modelMatrix = mat4.create();
 		var uModel = gl.getUniformLocation(program,"uModel");
+		mat4.scale(modelMatrix, modelMatrix, scale);
 		mat4.translate(modelMatrix, modelMatrix, translateMatrix);
 		mat4.rotateX(modelMatrix,modelMatrix,glMatrix.toRadian(rotateX));
 		mat4.rotateY(modelMatrix,modelMatrix,glMatrix.toRadian(rotateY));
@@ -203,7 +206,7 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var viewMatrix = mat4.create();
 		var uView = gl.getUniformLocation(program,"uView");
-		mat4.lookAt(viewMatrix,[1,0.25,2],[0,0.25,0],[0,1,0]);
+		mat4.lookAt(viewMatrix,[-5,2,3],[2,0,-2],[0,1,0]);
 		gl.uniformMatrix4fv(uView,false,viewMatrix);
 
 		var projectionMatrix = mat4.create();
@@ -225,11 +228,11 @@ function full_metal_wall(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-		
+
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
 		gl.generateMipmap(gl.TEXTURE_2D);
@@ -261,7 +264,7 @@ function create_wall_window(gl, program, canvas, x, y, z, rotateX, rotateY, rota
 }
 
 function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-	
+
 	var image = new Image();
 	image.onload = function(){ 
 		// Coordinates
@@ -398,7 +401,7 @@ function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -418,7 +421,7 @@ function create_ledge_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotat
 }
 
 function create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
-	
+
 	var image = new Image();
 	image.onload = function(){ 
 		// Coordinates
@@ -555,7 +558,7 @@ function create_door(gl, program, canvas, x, y, z, rotateX, rotateY, rotateZ){
 
 		var texture = gl.createTexture();
 		var uSampler = gl.getUniformLocation(program, 'uSampler');
-		
+
 		gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
 		gl.activeTexture(gl.TEXTURE0);
 		gl.bindTexture(gl.TEXTURE_2D, texture);
